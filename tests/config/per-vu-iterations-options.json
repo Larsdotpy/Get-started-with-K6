@@ -1,0 +1,21 @@
+{
+    "scenarios": {
+        "registration": {
+            "executor": "per-vu-iterations",
+            "exec": "registration",
+            "vus": 20,
+            "iterations": 100,
+            "maxDuration": "1m"
+        }
+    },
+    "thresholds": {
+        "http_req_duration": ["p(95)<=2000", "avg<1000"],
+        "checks": ["rate >=0.9"],
+        "http_req_failed": [{
+            "threshold": "rate<=0.02",
+            "abortOnFail": false
+        }]
+    },
+    "noConnectionReuse": true,
+    "userAgent": "MyK6UserAgentString/1.0"
+}

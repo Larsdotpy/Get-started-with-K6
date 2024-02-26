@@ -1,0 +1,21 @@
+// based on https://grpc.io/docs/guides/concepts.html
+// updated to proto3 version and removed required type on HelloResponse message, see https://stackoverflow.com/questions/31801257/why-required-and-optional-is-removed-in-protocol-buffers-3
+
+syntax = "proto3";
+
+package hello;
+
+service HelloService {
+  rpc SayHello(HelloRequest) returns (HelloResponse);
+  rpc LotsOfReplies(HelloRequest) returns (stream HelloResponse);
+  rpc LotsOfGreetings(stream HelloRequest) returns (HelloResponse);
+  rpc BidiHello(stream HelloRequest) returns (stream HelloResponse);
+}
+
+message HelloRequest {
+  optional string greeting = 1;
+}
+
+message HelloResponse {
+  string reply = 1;
+}

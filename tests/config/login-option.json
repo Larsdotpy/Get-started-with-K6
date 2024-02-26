@@ -1,0 +1,16 @@
+{
+  "scenarios": {
+    "login": {
+      "executor": "shared-iterations",
+      "exec": "login",
+      "options": {
+        "browser": {
+          "type": "chromium"
+        }
+      }
+    }
+  },
+  "thresholds": {
+    "checks": ["rate==1.0"]
+  }
+}

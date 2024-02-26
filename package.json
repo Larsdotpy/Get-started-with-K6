@@ -1,0 +1,14 @@
+{
+  "name": "get-started-with-k6",
+  "version": "1.0.0",
+  "description": "Example projects with example exercises to explore the features of K6 performance test tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "./k6 run tests/scripts/C-future-ideas/05-full-modular-main-script/main.js -e DOMAIN=test --out csv=tests/reports/results.csv"
+  },
+  "author": "Marc van 't Veer",
+  "license": "ISC",
+  "dependencies": {
+    "@types/k6": "^0.48.0"
+  }
+}
