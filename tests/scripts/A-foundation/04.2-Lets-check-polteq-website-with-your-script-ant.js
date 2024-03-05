@@ -31,13 +31,13 @@ export default function (){
         .toArray()
         .forEach(function (item){
             if(item.attr('id')!== undefined){
-                console.log(`item: ${JSON.stringify(item.attr('id'))}`) // JSON.stringify make string from object
+                console.log(`div: ${JSON.stringify(item.attr('id'))}`); // JSON.stringify make string from object
             }
 
             if(item.attr('id') === 'footer'){
                 let footer = item.contents().text().replaceAll(/(\s+)/gm, " "); // remove multiple whitespaces from string and replace with single space
-                console.log(footer)
-                check(footer, {'NL address of Polteq is found: ' :(r) => r.includes('Printerweg')})
+                console.log(`footer-div: ${footer}`);
+                check(footer, {'NL address of Polteq is found: ' :(r) => r.includes('Printerweg')});
             }
         })
 
