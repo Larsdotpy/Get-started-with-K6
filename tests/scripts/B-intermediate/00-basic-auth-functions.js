@@ -1,6 +1,6 @@
 import http from "k6/http";
-import { randomString } from 'https://jslib.k6.io/k6-utils/1.2.0/index.js';
-import { check } from "k6";
+import {randomString} from 'https://jslib.k6.io/k6-utils/1.2.0/index.js';
+import {check} from "k6";
 
 /*
 - register yourself
@@ -12,7 +12,7 @@ import { check } from "k6";
 
 const url = 'https://test-api.k6.io';
 
-const account ={
+const account = {
     username: randomString(8),
     password: "test1234!",
     first_name: "Marc",
@@ -39,11 +39,12 @@ const params = {
 
 export function setup() {
 
-    let response = http.post(`${url}/user/register/`,payload,params);
+    let response = http.post(`${url}/user/register/`, payload, params);
     check(response, {
         'Registration status is 201 (Created)': (r) => r.status === 201,
     })
 
+    // this is a Post method, sending data to endpoint. See: https://k6.io/docs/javascript-api/k6-http/post/
     let username = account.username, password = account.password;
     response = http.post(`https://test-api.k6.io/auth/basic/login/`, {username, password})
     check(response, {
@@ -53,6 +54,6 @@ export function setup() {
     return response;
 }
 
-export default function (data){
+export default function (data) {
     console.log(`Login new user: ${data.body}`)
 }
