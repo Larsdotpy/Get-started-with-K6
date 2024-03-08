@@ -17,9 +17,32 @@ export default function (){
     }
 
     let respons = http.get(url,headerParam);
-     let body = JSON.parse(respons.body)
-    console.log(respons.request)
-    console.log(`Number of crocodiles: ${body.length}, First element: ${body[1].name}`)
+
+    // save body of the response
+    let body = JSON.parse(respons.body)
+
+    // print out the request of the response, see other options: https://k6.io/docs/javascript-api/k6-http/response/
+    console.log(`Request: ${JSON.stringify(respons.request)}`)
+    console.log(`Number of crocodiles: ${body.length}`)
+
+    // Response body is an array, forEach selects each item from the array and then print out the name of the croc
+    body.forEach(croc => {
+        console.log(`First name of a croc: ${croc.name}`)
+    })
+
+    // save name croc if sex is "M" response in variable, see array methods: https://javascript.info/array-methods
+    let newCrocs = [];
+
+    body.forEach(element => {
+        if(element.sex === "M"){
+            let crocMale = {};
+            crocMale.id = element.id;
+            crocMale.name = element.name;
+            console.log(JSON.stringify(crocMale))
+            newCrocs.push(crocMale)
+        }
+    })
+    console.log(newCrocs)
 
     check(respons, {
         'is status is 200: ' : (r) => r.status === 200,
