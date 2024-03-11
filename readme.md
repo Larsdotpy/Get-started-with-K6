@@ -2,11 +2,17 @@
 
 To learn K6 load test tooling an IDE is needed, a project and exercises. During the exercises you will discover how K6 works and how you can use it to put an application under load. The whole goal of load testing is to analyse the behavior of an application under load. 
 
+To get started K6 needs to be installed on your computer, an IDE is needed to write K6 load tests and in the IDE an extension can be installed that makes it easier to create the load test scripts. Follow the steps below to get started
+
 The getting started consists of the following steps:
+- Install K6, see
+  - https://k6.io/docs/get-started/installation/
 - Install an IDE of your preference, see 
   - https://grafana.com/docs/k6/latest/misc/integrations/
-- Install K6, see 
-  - https://k6.io/docs/get-started/installation/
+  - Integrated Development Environment (IDE): In the context of software development, IDE stands for "Integrated Development Environment". This is a software tool that developers use to write, test, and debug software applications.
+  - Choose a development tool that suits you, for the examples there is no special requirements. I'm using MacOS with IntelliJ IDEA.
+- Install the K6 IDE extenstion for the choosen IDE
+  - https://grafana.com/docs/k6/latest/misc/integrations/
 - Watch the introduction on K6, see 
   - https://www.youtube.com/embed/y5tteMKZUqk and 
   - view the K6 documentation https://k6.io/docs/
