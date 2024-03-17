@@ -1,7 +1,12 @@
 import http from 'k6/http';
-import { Trend } from 'k6/metrics';
+import {Trend} from 'k6/metrics';
 
-let myDurationTrend = new Trend('my_duration_trend');
+/*
+- What is the difference between build in http req duration and the custom duration metrics?
+ */
+
+let trendPolteqDuration = new Trend('trend_polteq_duration');
+let trendGoogleDuration = new Trend('trend_google_duration');
 
 export let options = {
     vus: 10,
@@ -9,11 +14,17 @@ export let options = {
     iterations: 10
 }
 
-export default function (){
-    let response = http.get('https://www.polteq.com');
-    console.log(`timings-duration: ${JSON.stringify(response.timings.duration)}`)
+export default function () {
+    let polteqResponse = http.get('https://www.polteq.com');
+    console.log(`Polteq http duration: ${JSON.stringify(polteqResponse.timings.duration)}`)
 
     // add the response duration to the custom trend metric
-    myDurationTrend.add(response.timings.duration);
+    trendPolteqDuration.add(polteqResponse.timings.duration);
+
+    let googleResponse = http.get('https://www.google.com');
+    console.log(`Google http duration: ${JSON.stringify(googleResponse.timings.duration)}`)
+
+    // add the response duration to the custom trend metric
+    trendGoogleDuration.add(googleResponse.timings.duration);
 
 }
