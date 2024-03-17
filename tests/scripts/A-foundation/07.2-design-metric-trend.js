@@ -1,7 +1,7 @@
 import http from 'k6/http';
-import {Counter} from 'k6/metrics';
+import { Trend } from 'k6/metrics';
 
-let myCounter = new Counter('my_counter');
+let myDurationTrend = new Trend('my_duration_trend');
 
 export let options = {
     vus: 10,
@@ -9,12 +9,11 @@ export let options = {
     iterations: 10
 }
 
-export default function () {
+export default function (){
     let response = http.get('https://www.polteq.com');
     console.log(`timings-duration: ${JSON.stringify(response.timings.duration)}`)
 
-    // count number of home-page duration is below 100 ms
-    if (response.timings.duration <= 100) {
-        myCounter.add(1)
-    }
+    // add the response duration to the custom trend metric
+    myDurationTrend.add(response.timings.duration);
+
 }

@@ -4,6 +4,7 @@ import { Rate } from "k6/metrics";
 
 /*
 - split up the two checks into two separate checks and add them to the error rate variable
+- see the difference in error response metric
  */
 
 // define a new rate metric
@@ -11,6 +12,9 @@ export let errorRate = new Rate('errors')
 
 // define options with the thresholds
 export let options = {
+    vus: 10,
+    duration: '30s',
+    iterations: 10,
     thresholds: {
         errors: ['rate<0.1'] // less than 10% errors otherwise execution stops
     }
@@ -19,7 +23,10 @@ export let options = {
 export default function (){
     let response = http.get('https://www.polteq.com');
 
-    console.log(`Response status: ${response.status}, body size: ${Math.round(response.body.length/1024).toFixed(2)} MiB`)
+    console.log(`Response status: ${response.status}, body size: ${response.body.length} bytes`)
+
+    // alternative for rounding body.length to MiB
+    // console.log(`Response status: ${response.status}, body size: ${Math.round(response.body.length/1024).toFixed(2)} MiB`)
 
     let results = check(response, {
         'is response status 200:': (r) => r.status === 200,
