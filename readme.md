@@ -27,6 +27,14 @@ The getting started consists of the following steps:
   - https://k6.io/docs/get-started/running-k6/
   - Start met commando in de CLI: `k6 new`
   - continue and follow all the steps in the get-started
+-  Install Git
+  - https://github.com/git-guides/install-git
+
+Everything is now ready to get started. The idea is that you create a new project in your IDE, follow the exercises from 
+the grafana/k6-learn (https://github.com/grafana/k6-learn) and if you get stuck or need inspiration that you look at my
+worked out examples in https://github.com/Christian-Marc/Get-started-with-K6. So during the getting started you are constant
+switching between your own project and this project.
+
 - Create your first K6 project, see
   - Cloning a Github project: https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository
   - Cloning a template project (vanilla plain project): https://github.com/tom-miseur/k6-templates
