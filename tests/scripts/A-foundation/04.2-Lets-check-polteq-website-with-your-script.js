@@ -8,20 +8,30 @@ import { check } from "k6";
 - add check on body content (like address of Polteq NL is returned (see: https://k6.io/docs/javascript-api/k6-http/response/response-html/)
  */
 
+export const options = {
+    vus: 2,
+    duration: '5s'
+};
+
 export default function (){
-    let response = http.get('');
+    let response = http.get('https://www.polteq.com');
 
     console.log(`Response status: ${response.status}`)
-    // negative response validation
-    check(response, {'is response status 404:': (r) => r.status === 404});
 
-    // validate/check a html element
-    // use div to find all div's in the response and the select footer with Polteq address
+    // negative response validation
+    check(response, {'is response status 404:': (r) => r.status === 404,
+    'has Server header': (r) => r.headers['Server'] !== undefined});
+
     let doc = response.html();
     doc
-        .find('link')
+        .find('div')
         .toArray()
         .forEach(function (item){
-            console.log(item.attr('href'));
+            if(item.attr('id') === 'footer'){
+                check(item.text(), {
+                    'Validate if footer contains "Werken bij Polteq"': (text) => text.includes('Werken bij Polteq'),
+                    'Validate if footer contains "Nederland"': (text) => text.includes('Nederland')
+                })
+            }
         })
 }

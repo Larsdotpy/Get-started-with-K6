@@ -6,6 +6,7 @@ export default function() {
     let response = http.post(url, 'Hello world!');
     check(response, {
         'Application says hello': (r) => r.body.includes('Hello world!'),
-        'Application says Bonjour': (r) => r.body.includes('Bonjour!')
+        'Application says Bonjour': (r) => r.body.includes('Bonjour!'),
+        'Status code is 200': (r) => r.status === 200
     });
 }
